@@ -1,10 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Provider } from 'react-redux';
+import '../node_modules/bulma/css/bulma.css';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import schoolApp from './reducers';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// const persistedState = configureStore();
+const store = createStore(schoolApp)
+store.subscribe(() => {
+    console.log(store.getState())
+})
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
