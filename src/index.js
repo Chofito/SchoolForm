@@ -1,22 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import '../node_modules/bulma/css/bulma.css';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
-import schoolApp from './reducers';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "../node_modules/bulma/css/bulma.css";
+import App from "./components/App";
+import * as serviceWorker from "./serviceWorker";
+import { createStore } from "redux";
+import schoolApp from "./reducers";
 
 // const persistedState = configureStore();
-const store = createStore(schoolApp)
+const store = createStore(schoolApp);
 store.subscribe(() => {
-    console.log(store.getState())
-})
+  console.log(store.getState());
+});
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

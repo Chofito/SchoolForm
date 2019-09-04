@@ -1,15 +1,34 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import SchoolForm from '../components/SchoolForm'
-import { addNewSchool } from '../actions/index';
+import React from "react";
+import { connect } from "react-redux";
+import SchoolForm from "../components/SchoolForm";
+import { addNewSchool, editSchool, setEditMode } from "../actions/index";
 
-const AddSchool = ({ dispatch }) => (
+const AddSchool = ({ editMode, onClick, addSchool }) => {
+  return (
     <div>
-        <SchoolForm
-            onSubmit={e => {
-                dispatch(addNewSchool(e))
-            }}
-        />
+      <SchoolForm
+        onSubmit={e => {
+          if (editMode === "NO_EDIT") {
+            addSchool(e);
+          } else {
+            onClick(e);
+          }
+        }}
+      />
     </div>
-);
-export default connect()(AddSchool);
+  );
+};
+
+const mapStateToProps = state => ({ editMode: state.editMode });
+const mapDispatchToProps = dispatch => ({
+  onClick: school => {
+    dispatch(editSchool(school));
+    dispatch(setEditMode("NO_EDIT"));
+  },
+  addSchool: data => dispatch(addNewSchool(data))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddSchool);
