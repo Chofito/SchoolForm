@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { initialize } from "redux-form";
 import SchoolForm from "../components/SchoolForm";
 import { addNewSchool, editSchool, setEditMode } from "../actions/index";
 
@@ -25,7 +26,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(editSchool(school));
     dispatch(setEditMode("NO_EDIT"));
   },
-  addSchool: data => dispatch(addNewSchool(data))
+  addSchool: data => {
+    dispatch(addNewSchool(data));
+    dispatch(initialize("schoolForm", {}));
+  }
 });
 
 export default connect(

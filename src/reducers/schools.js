@@ -1,7 +1,6 @@
 import { school } from "./school";
 
 const schools = (state = [], action) => {
-  console.log(state);
   switch (action.type) {
     case "ADD_SCHOOL":
       return [...state, school(undefined, action)];
